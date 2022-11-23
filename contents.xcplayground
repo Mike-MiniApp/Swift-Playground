@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='Free Writing'/>
+        <page name='CallBack'/>
+        <page name='Closure'/>
+        <page name='URLSession-GithubAPI'/>
+        <page name='UIVIewController'/>
+        <page name='URLSession-QiitaAPI'/>
+        <page name='UserDefaluts'/>
+        <page name='doTryCatch'/>
+        <page name='DispatchQueue'/>
+        <page name='Static'/>
+        <page name='Completion-URLSession-QittaAPI'/>
+        <page name='enum'/>
+        <page name='map'/>
+        <page name='ForEach'/>
+        <page name='Enum-Errror-URLRequest'/>
+        <page name='Extension'/>
+        <page name='URLSession-ITunesAPI'/>
+        <page name='Enum-Error'/>
+        <page name='enum-exampleBloodType'/>
+        <page name='protocol'/>
+        <page name='AsyncAwait-URLSession'/>
+        <page name='For'/>
+        <page name='Class-Struct'/>
+        <page name='AsyncAwait-SimpleMethod'/>
+        <page name='Completion-URLSession-QittaAPI-Result'/>
+        <page name='FlatMap'/>
+        <page name='NotificationCenter'/>
+        <page name='Y!2023_SubClass'/>
+        <page name='_func'/>
+        <page name='TrueOrFalse'/>
+        <page name='_for'/>
+        <page name='switch_interval_matching'/>
+        <page name='SwiftDoc_Class'/>
+    </pages>
+</playground>
