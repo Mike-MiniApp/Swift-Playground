@@ -2,57 +2,46 @@
 
 import UIKit
 
-// MARK: - Vehicle is superclass
-class Vehicle {
-    var currentSpeed = 0.0
-    var description: String {
-        return "走行時速\(currentSpeed)マイル"
-    }
-
-    func makeNoise() {
-        // 何もしない -　乗り物は必ずしも騒音を出しません
-    }
+enum VendingMachineError: Error {
+    case invalidSelection
+    case insufficientFunds(coinsNeeded: Int)
+    case outOfStock
 }
 
-let vehicle = Vehicle()
-
-print("乗り物",vehicle.description)
-
-// MARK: - Bicycle is subclass
-class Bicycle: Vehicle {
-    var hasBasket = false
-
-    override func makeNoise() {
-        print("ブンブン")
-    }
+struct Item {
+    var price: Int
+    var count: Int
 }
 
-let bicycle = Bicycle()
-bicycle.currentSpeed = 15
-print("バイク",bicycle.description)
+class VendingMachine {
+    var inventory = ["Candy Bar": Item(price: 12, count: 7),
+                     "Chips": Item(price: 10, count: 4),
+                     "Pretzels": Item(price: 7, count: 11)
+    ]
 
-bicycle.makeNoise()
+    var coinsDeposited = 0
 
-// MARK: - Car is subclass
-class Car: Vehicle {
-    var gear = 1
-
-    override var description: String {
-        return super.description + "でギアは\(gear)"
-    }
-}
-
-let car = Car()
-car.currentSpeed = 25.0
-car.gear = 3
-print("自動車:\(car.description)")
-
-class AutomaticCar: Car {
-    // currentSpeedプロパティを設定するたびに、プロパティのdidSetはgearに新しい速度に低下ギアを選択する
-    override var currentSpeed: Double {
-        didSet {
-            gear = Int(currentSpeed / 10) + 1
+    func vend(name: String) throws {
+        guard let item = inventory[name] else {
+            throw VendingMachineError.invalidSelection
         }
+
+        guard item.count > 0 else {
+            throw VendingMachineError.outOfStock
+        }
+
+        guard item.price <= coinsDeposited else {
+            throw VendingMachineError.insufficientFunds(coinsNeeded: item.price - coinsDeposited)
+        }
+
+        coinsDeposited -= item.price
+
+        var newItem = item
+        newItem.count = -1
+        inventory[name] = newItem
+        print("Dispensing\(name)")
     }
+
+
 }
 

@@ -56,4 +56,9 @@ class AutomaticCar: Car {
     }
 }
 
+let automaticCar = AutomaticCar()
+automaticCar.currentSpeed = 35.0
+print("オートマ車：\(automaticCar.description)")
+
+
 
