@@ -15,9 +15,11 @@ class Vehicle {
 }
 
 let vehicle = Vehicle()
-
 print("乗り物",vehicle.description)
 
+
+
+print("----------")
 // MARK: - Bicycle is subclass
 class Bicycle: Vehicle {
     var hasBasket = false
@@ -30,9 +32,11 @@ class Bicycle: Vehicle {
 let bicycle = Bicycle()
 bicycle.currentSpeed = 15
 print("バイク",bicycle.description)
-
 bicycle.makeNoise()
 
+
+
+print("----------")
 // MARK: - Car is subclass
 class Car: Vehicle {
     var gear = 1
@@ -47,6 +51,9 @@ car.currentSpeed = 25.0
 car.gear = 3
 print("自動車:\(car.description)")
 
+
+
+print("----------")
 class AutomaticCar: Car {
     // currentSpeedプロパティを設定するたびに、プロパティのdidSetはgearに新しい速度に低下ギアを選択する
     override var currentSpeed: Double {
@@ -58,6 +65,9 @@ class AutomaticCar: Car {
 
 let automaticCar = AutomaticCar()
 automaticCar.currentSpeed = 35.0
+print("オートマ車：\(automaticCar.description)")
+
+automaticCar.currentSpeed = 70.0
 print("オートマ車：\(automaticCar.description)")
 
 
