@@ -35,5 +35,6 @@
         <page name='switch_interval_matching'/>
         <page name='SwiftDoc_Class'/>
         <page name='SwiftDoc_Error_Handling'/>
+        <page name='SwiftDoc_Extensions'/>
     </pages>
 </playground>

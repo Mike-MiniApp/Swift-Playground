@@ -9,56 +9,46 @@ enum VendingMachineError: Error {
 }
 
 struct Item {
-    var price: Int
-    var count: Int
+    let price: Int
+    let count: Int
 }
 
 class VendingMachine {
-    var inventory = ["Candy Bar": Item(price: 12, count: 7),
-                     "Chips": Item(price: 10, count: 4),
-                     "Pretzels": Item(price: 7, count: 11)
-    ]
+    let productArray = ["りんごジュース": Item(price: 100, count: 3),
+                        "みかんジュース": Item(price: 200, count: 2),
+                        "マンゴージュース": Item(price: 300, count: 5)]
 
-    var coinsDeposited = 0
+    let coins: Int
+
+    init(coins: Int) {
+        self.coins = coins
+    }
 
     func vend(name: String) throws {
-        guard let item = inventory[name] else {
+        guard let item = productArray[name] else {
             throw VendingMachineError.invalidSelection
+        }
+
+        guard coins >= item.price else {
+            throw VendingMachineError.insufficientFunds(coinsNeeded: item.price - coins)
         }
 
         guard item.count > 0 else {
             throw VendingMachineError.outOfStock
         }
 
-        guard item.price <= coinsDeposited else {
-            throw VendingMachineError.insufficientFunds(coinsNeeded: item.price - coinsDeposited)
-        }
-
-        coinsDeposited -= item.price
-
-        var newItem = item
-        newItem.count = -1
-        inventory[name] = newItem
-        print("Dispensing\(name)")
+        print("\(name)は\(item.price)円で購入されました")
     }
 }
 
-let vendingMachine = VendingMachine()
-vendingMachine.coinsDeposited = 8 // コイン投入額
+let vendingMachine = VendingMachine(coins: 400)
 
 do{
-    try vendingMachine.vend(name: "Chips")
+    try vendingMachine.vend(name: "りんごジュース")
+}catch VendingMachineError.invalidSelection {
+    print("商品名が無効です")
+}catch VendingMachineError.insufficientFunds(let coinsNeeded) {
+    print("\(coinsNeeded)円不足しています")
+}catch VendingMachineError.outOfStock {
+    print("在庫が不足しています")
 }
-catch VendingMachineError.invalidSelection {
-    print("無効な選択です")
-}
-catch VendingMachineError.outOfStock {
-    print("在庫切れです")
-}
-catch VendingMachineError.insufficientFunds(let coinsNeeded) {
-    print("お金が足りません。あと\(coinsNeeded)コイン投入してください")
-}
-catch {
-    print("予期しないエラー,\(error)")
-}
-
